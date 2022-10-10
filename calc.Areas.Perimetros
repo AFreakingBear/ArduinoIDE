@@ -1,0 +1,101 @@
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("");
+  Serial.println("Indica uma Figura para Calcular:");
+  Serial.println("Areas: ");
+  Serial.println("1-Quadrado || 2-Triangulo || 3-Retangulo || 4- Cilindro");
+  Serial.println("Perimetros: ");
+  Serial.println("5-Quadrado || 6-Triangulo || 7-Retangulo || 8-Circulo");
+}
+
+void loop() {
+  int figura;
+
+  // put your main code here, to run repeatedly:
+  if (Serial.available()) {
+    figura = Serial.parseInt();
+    switch (figura)     // Para a Figura 1,2,3,4,5,6,7,8,9,69,3000,x?
+
+    {
+      float A, L, B, Pi, R, P;  //variavel da area  || Lado || Base ||
+
+      case 1:  //area do quadrado
+        Serial.println("Indica a medida do lado do quadrado:");
+        while (!Serial.available()) {}  //"enquanto o Serial não(!) esta available()"
+        L = Serial.parseFloat();        //se estiver =L (lado)
+        A = L * L;                      //Area = lxl
+        Serial.print("A area do quadrado e :");
+        Serial.print(A);
+        Serial.println("cm2.");
+        break;
+
+      case 2:  // area do triangulo
+        Serial.println("Indica a medida da base: ");
+        while (!Serial.available()) {}  //"enquanto o Serial não(!) esta available()" vai esperar por B  e depois faz print ao b cm para o enduser saber que o input foi lido
+        B = Serial.parseFloat();       // B = ao input
+        Serial.print(B);
+        Serial.println("cm");
+        Serial.println("Indica a medida do lado: ");
+        while (!Serial.available()) {}  //espera por L
+
+        L = Serial.parseFloat();
+        Serial.print(L);
+        Serial.println("cm");
+        A = (B * L) / 2;   //area triangulo
+        Serial.print("A area do triangulo e: ");
+        Serial.print(A);
+        Serial.print(" cm2.");
+        break;
+
+      case 3:  //area retangulo
+        Serial.println("Indicia a base do retangulo: ");
+        while (!Serial.available()) {}
+        B = Serial.parseFloat();
+        Serial.print(B);
+        Serial.println(" cm");
+        Serial.println("indica o lado do retangulo: ");
+        while (!Serial.available()) {}  //espera por L
+        L = Serial.parseFloat();
+        Serial.print(L);
+        Serial.println(" cm");
+        A = B * L;  //calcula A
+        Serial.println("A area do retangulo e: ");
+        Serial.print(A);
+        Serial.print(" cm2");
+        break;
+
+      case 4:  //area cilindro
+        Pi = 3.14;
+        Serial.print("Indica o raio da base: ");
+        while (!Serial.available()) {}  //espera por R
+        R = Serial.parseFloat();
+        Serial.print(R);
+        Serial.println(" cm");
+        Serial.print("Indica a altura do cilindro: ");
+        while (!Serial.available()) {}  //espera por L
+        L = Serial.parseFloat();
+        Serial.print(L);
+        Serial.println(" cm");
+        A = 2 * Pi * R * L;
+        Serial.print("A area do cilindro e: ");
+        Serial.print(A);
+        Serial.println(" cm2.");
+        break;
+
+      case 5:  //perimetro do quadrado
+        Serial.println("Indica a medida de um dos lados: ");
+        while (!Serial.available()) {}  //espera por L
+        L = Serial.parseFloat();
+        Serial.print(L);
+        Serial.println(" cm.");
+        P = 4 * L;  //calcula o perimetro
+        Serial.print("O perimetro do quadrado e:");
+        Serial.print(P);
+        Serial.println("cm.");
+        break;
+    }  //depois do "switch" acabar  pergunta se:
+    Serial.println("");
+    Serial.println("Deseja calcular a area ou o perimetro de mais alguma figura? Indique: ");
+  }
+}
